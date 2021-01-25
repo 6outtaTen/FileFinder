@@ -1,0 +1,521 @@
+#:import hex kivy.utils.get_color_from_hex
+#:import Config kivy.config
+<ChoiceWindow>:
+
+    canvas.before:
+        Color:
+            rgba: hex('#6187AD')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+
+    FloatLayout:
+        background_normal: ''
+        cols: 1
+
+        FloatLayout:
+            background_normal: ''
+            size: root.width, root.height
+
+            Label:
+                text: "File Finder"
+                size_hint: 0.8, 0.2
+                pos_hint: {"x": 0.1, "top": 1}
+                font_size: 35
+
+            Label:
+                text: "Please select your desired search mode:"
+                size_hint: 0.81, 0.2
+                pos_hint: {"x": 0.1, "top": 0.8}
+                valign: "middle"
+                font_size: 24
+
+            Label:
+                text: "Starts With: Program searches for files that start with a given sequence of characters"
+                size_hint: 0.79, 0.2
+                pos_hint: {"top": 0.42}
+                font_size: 19
+
+            Label:
+                text: "Contains: Program searches for files contain a given sequence of characters"
+                size_hint: 0.710, 0.2
+                pos_hint: {"top": 0.32, "x": 0}
+                font_size: 19
+
+            Label:
+                text: "Ends With: Program searches for files that end with  a given sequence of characters"
+                size_hint: 0.78, 0.2
+                pos_hint: {"top": 0.22}
+                font_size: 19
+
+
+
+        Button:
+
+            canvas.before:
+                Color:
+                    rgba: 0,0,0,1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+
+            text: "Starts With"
+            pos_hint: {"top": 0.6}
+            size_hint: 0.3, 0.11
+            font_size: 24
+            background_normal: ''
+            background_color: hex('#A9A9A9')
+            on_release:
+                opacity: 0.5
+                root.manager.transition.direction = "left"
+                root.starts_with_mode()
+                root.go_to_input()
+
+            on_press:
+                background_down: hex('#DCDCDC')
+                background_color: hex('#DCDCDC')
+
+
+        Button:
+
+            canvas.before:
+                Color:
+                    rgba: 0,0,0,1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+
+            text: "Specific File/Folder"
+            pos_hint: {"top": 0.485}
+            size_hint: 1, 0.11
+            font_size: 24
+            background_normal: ''
+            background_color: hex('#A9A9A9')
+            on_release:
+                opacity: 0.5
+                root.manager.transition.direction = "left"
+                root.specific_mode()
+                root.go_to_input()
+
+            on_press:
+                background_down: hex('#DCDCDC')
+                background_color: hex('#DCDCDC')
+
+
+        Button:
+
+            canvas.before:
+                Color:
+                    rgba: 0,0,0,1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+
+            text: "Contains"
+            pos_hint: {"top": 0.6, "x": 0.3}
+            size_hint: 0.36, 0.11
+            font_size: 24
+            background_normal: ''
+            background_color: hex('#A9A9A9')
+            on_release:
+                opacity: 0.5
+                root.manager.transition.direction = "left"
+                root.contains_mode()
+                root.go_to_input()
+
+            on_press:
+                background_down: hex('#DCDCDC')
+                background_color: hex('#DCDCDC')
+
+        Button:
+
+            canvas.before:
+                Color:
+                    rgba: 0,0,0,1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+
+            text: "Ends With"
+            pos_hint: {"top": 0.6, "x": 0.65}
+            size_hint: 0.36, 0.11
+            font_size: 24
+            background_normal: ''
+            background_color: hex('#A9A9A9')
+            on_release:
+                opacity: 0.5
+                #root.manager.transition.direction = "left"
+                root.ends_with_mode()
+                root.go_to_input()
+
+            on_press:
+                background_down: hex('#DCDCDC')
+                background_color: hex('#DCDCDC')
+
+        Button:
+
+            canvas.before:
+
+                Color:
+                    rgba: 0,0,0,1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+
+            background_normal: ''
+            background_color: hex('#A9A9A9')
+            font_size: 24
+            text: "Quit"
+            size_hint: 1, 0.07
+            pos_hint: {"top": 0.07, "x": 0}
+            on_press:
+                app.stop()
+                
+
+
+
+<InputWindow>:
+    path: path
+    sequence: sequence
+
+
+    canvas.before:
+        Color:
+            rgba: hex('#6187AD')
+
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        text: "Enter a path in which you want to search:"
+        font_size: 20
+        size_hint: 0.15, 0.2
+        pos_hint: {"top": 0.92, "x": 0.13}
+
+    Label:
+        text: """Any 'Not responding' states are safe to ignore - The program is just working :)"""
+        font_size: 20
+        size_hint: 0.15, 0.2
+        pos_hint: {"top": 0.3, "x": 0.31}
+
+    Label:
+        text: """Visit the 'Settings' tab to configure the results saving option"""
+        font_size: 20
+        size_hint: 0.15, 0.2
+        pos_hint: {"top": 0.6, "x": 0.22}
+
+
+    TextInput:
+        id: path
+        size_hint: 1, 0.05
+        pos_hint: {"top": 0.8, "x": 0}
+
+    Label:
+        text: "Enter the sequence of characters or name of the file/folder:"
+        font_size: 20
+        size_hint: 0.15, 0.2
+        pos_hint: {"top": 0.79, "x": 0.22}
+
+    TextInput:
+        id: sequence
+        size_hint: 1, 0.05
+        pos_hint: {"top": 0.67, "x": 0}
+
+    Button:
+
+        canvas.before:
+            Color:
+                rgba: 0,0,0,1
+
+            Line:
+                width: 2
+                rectangle: self.x, self.y, self.width, self.height
+
+        background_normal: ''
+        background_color: hex('#A9A9A9')
+        text: "Search"
+        font_size: 20
+        size_hint: 1, 0.1
+        pos_hint: {"top": 0.1, "x": 0}
+        on_release:
+            root.init_search()
+            text: "Search Again"
+            root.reset()
+
+
+
+    Button:
+        canvas.before:
+
+            Color:
+                rgba: 0,0,0,1
+
+            Line:
+                width: 2
+                rectangle: self.x, self.y, self.width, self.height
+
+        background_normal: ''
+        background_color: hex('#A9A9A9')
+        font_size: 24
+        text: "Go Back"
+        size_hint: 0.30, 0.11
+        pos_hint: {"x": 0.35, "top": 1}
+        on_release:
+            root.init_history()
+            root.go_back()
+            root.manager.transition.direction = "right"
+
+
+
+    Button:
+
+        canvas.before:
+
+            Color:
+                rgba: 0,0,0,1
+
+            Line:
+                width: 2
+                rectangle: self.x, self.y, self.width, self.height
+
+        background_normal: ''
+        background_color: hex('#A9A9A9')
+        text: "Settings"
+        size_hint: 0.37, 0.11
+        pos_hint: {"top": 1}
+        font_size: 24
+        on_release:
+            root.go_to_settings()
+            root.manager.transition.direction = "right"
+
+
+    Button:
+
+        canvas.before:
+
+            Color:
+                rgba: 0,0,0,1
+
+            Line:
+                width: 2
+                rectangle: self.x, self.y, self.width, self.height
+
+        
+        background_normal: ''
+        background_color: hex('#A9A9A9')
+        text: "History"
+        size_hint: 0.37, 0.11
+        pos_hint: {"x": 0.63, "top": 1}
+        font_size: 24
+        on_release:
+            root.init_history()
+            root.go_to_history()
+            #root.init_history()
+           
+
+
+
+
+
+<SettingsWindow>:
+
+    canvas.before:
+        Color:
+            rgba: hex('#6187AD')
+
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        text: "Save every scan result as a separate file"
+        size_hint: 0.15, 0.2
+        pos_hint: {"top": 0.9, "x": 0.2}
+        font_size: 26
+
+    Label:
+        text: "Keep overwritting the single log file"
+        size_hint: 0.15, 0.2
+        pos_hint: {"top": 0.55, "x": 0.17}
+        font_size: 26
+
+    Button:
+
+        canvas.before:
+            Color:
+                rgba: 0,0,0,1
+
+            Line:
+                width: 2
+                rectangle: self.x, self.y, self.width, self.height
+
+        text: "Turn on"
+        background_normal: ''
+        background_color: hex('#A9A9A9')
+        size_hint: 0.22, 0.2
+        pos_hint: {"top": 0.9, "x": 0.7}
+        font_size: 24
+        on_release:
+            root.separate_mode()
+
+
+    Button:
+
+        canvas.before:
+            Color:
+                rgba: 0,0,0,1
+
+            Line:
+                width: 2
+                rectangle: self.x, self.y, self.width, self.height
+
+        text: "Turn on"
+        background_normal: ''
+        background_color: hex('#A9A9A9')
+        size_hint: 0.22, 0.2
+        pos_hint: {"top": 0.55, "x": 0.7}
+        font_size: 24
+        on_release:
+            root.single_mode()
+
+
+
+
+    Button:
+
+        canvas.before:
+            Color:
+                rgba: 0,0,0,1
+
+            Line:
+                width: 2
+                rectangle: self.x, self.y, self.width, self.height
+
+        background_normal: ''
+        background_color: hex('#A9A9A9')
+        text: "Go Back ->"
+        size_hint: 1, 0.11
+        pos_hint: {"top": 0.0999}
+        font_size: 24
+        on_release:
+            root.go_back()
+            root.manager.transition.direction = "left"
+ 
+
+<HistoryWindow>:
+
+    canvas.before:
+        Color:
+            rgba: hex('#6187AD')
+
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        text: "Work In Progress"
+        size_hint: 0.15, 0.2
+        pos_hint: {"top": 1, "x": 0.43}
+        font_size: 26
+
+    Label:
+        text: root.last_scan
+        size_hint:0.15, 0.2
+        pos_hint: {"top": 0.44, "x": 0.43}
+        font_size: 18
+
+
+        
+    Button:
+
+        canvas.before:
+            Color:
+                rgba: 0,0,0,1
+
+            Line:
+                width: 2
+                rectangle: self.x, self.y, self.width, self.height
+
+        background_normal: ''
+        background_color: hex('#A9A9A9')
+        text:"Clear All Scan History"
+        font_size: 24
+        pos_hint: {"top": 1}
+        size_hint: 1, 0.12
+        on_release:
+            root.clear_history()
+            root.init_history()
+
+    Label:
+        text: root.if_cleared
+        size_hint: 0.15, 0.2
+        font_size: 28
+        pos_hint: {"top": 0.85, "x": 0.43}
+
+
+
+    Button:
+
+        canvas.before:
+            Color:
+                rgba: 0,0,0,1
+
+            Line:
+                width: 2
+                rectangle: self.x, self.y, self.width, self.height
+
+        background_normal: ''
+        background_color: hex('#A9A9A9')
+        text: "Looking for older scans?"
+        size_hint: 1, 0.11
+        pos_hint: {"top": 0.21}
+        font_size: 24
+        on_release:
+            root.history_pop()
+            
+
+
+
+
+    Button:
+
+        canvas.before:
+            Color:
+                rgba: 0,0,0,1
+
+            Line:
+                width: 2
+                rectangle: self.x, self.y, self.width, self.height
+
+        background_normal: ''
+        background_color: hex('#A9A9A9')
+        text: "<- Go Back"
+        size_hint: 1, 0.11
+        pos_hint: {"top": 0.0999}
+        font_size: 24
+        on_release:
+            root.init_history()
+            root.go_back()
+            root.manager.transition.direction = "right"
+
+    Button:
+
+        canvas.before:
+            Color:
+                rgba: 0,0,0,1
+
+            Line:
+                width: 2
+                rectangle: self.x, self.y, self.width, self.height
+
+        background_normal: ''
+        background_color: hex('#A9A9A9')
+        text:"Show Recent Scan Details"
+        font_size: 24
+        pos_hint: {"top": 0.6}
+        size_hint: 1, 0.12 
+        on_release:
+            root.init_history()
