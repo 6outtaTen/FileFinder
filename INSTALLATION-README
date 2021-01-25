@@ -1,4 +1,4 @@
 This app is in very early development stage so to make sure it works properly, you need to carefully follow these steps:
-1. Go into dist/filefinder/ and unzip these files: "UNZIP ME" and "UNZIP ME 2"
+1. Go into dist/filefinder/ and unzip these files: "UNZIP ME" and "UNZIP ME 2" and copy the contents to the dist/ folder
 2. To launch this app go into dist/filefinder and locate the "filefinder" application.
 The whole app is right now really big in terms of size, because of a problem that is being worked on to fix it.
