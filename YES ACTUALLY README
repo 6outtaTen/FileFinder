@@ -1,0 +1,6 @@
+For some reason this program when ran from other PCs is displaying as a Trojan virus and whatnot in Windows Defender as well as other antiviruses.
+This is a common issue for apps made with pyinstaller. Link to a discussion about this: https://stackoverflow.com/questions/44377666/pyinstaller-exe-throws-windows-defender-no-publisher
+This isn't of course the only discssuion about this, you can search it online as well. I do not have anything to hide so I am providing the source code in this repo.
+Take it from a random unknown dev on the internet - it is safe
+So in order to run this you will probably need to disable Windows Defender or make an exception
+Cheers to whoever finds this.
