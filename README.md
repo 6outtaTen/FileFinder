@@ -1,2 +1,2 @@
 # FileFinder
-A GUI App made in python that is a fast search tool. It allows you to look for files/folders in your system that either start with a given sequence of characters, contain it, ends with it or is specific. The app then saves the results in form of a txt log file with the path to the found file/folder. The app is currently in development process and many more cool functions are yet to come.
+(old version, go to https://github.com/6outtaTen/FileFinder-2.0)A fast file/folder search tool made in python (kivy)
